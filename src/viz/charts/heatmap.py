@@ -1,6 +1,6 @@
 """The matrix: viz's one chart for a grid of values (models against evals or attacks, a correlation matrix, measures
 of several traits), drawn like the correlation matrices in Anthropic's posts. Cells touch, with thin white lines
-between them; a color bar in one tone (orange by default) keys the colors; each value is written in its cell; rows
+between them; a color bar in one tone (gold by default) keys the colors; each value is written in its cell; rows
 are labeled at the left and columns under the matrix."""
 from __future__ import annotations
 
@@ -218,7 +218,7 @@ def grid(W: float, rows: list[str], cols: list[str], cells: dict[tuple[int, int]
     return Body("".join(out), H, meta={"plot_x": (X0, X0 + grid_w), "second_left_out": bool(seconds) and not two})
 
 
-def heatmap(data, *, rows=None, cols=None, scale="coral", domain=None, center=None, unit=UNSET, decimals=None,
+def heatmap(data, *, rows=None, cols=None, scale="gold", domain=None, center=None, unit=UNSET, decimals=None,
             fmt=None, signed=False, values=True, label=None, row_groups=None, col_groups=None, sort=None,
             cell_width=None, cell_height=None, threshold=0.55, low="coral", high="blue", title=None, subtitle=None,
             width=None) -> Figure:
@@ -226,7 +226,7 @@ def heatmap(data, *, rows=None, cols=None, scale="coral", domain=None, center=No
     Anthropic's posts: cells that touch, each value written in its cell, a color bar, rows labeled at the left and
     columns under the matrix.
 
-    scale: one tone: "coral" (the default, the accent's hue), "blue", "sage" or "green", from a light tint at the low
+    scale: one tone: "gold" (the default, the accent's hue), "coral", "blue", "sage" or "green", from a light tint at the low
     end to the deep end; or "diverging" (`low` below `center` and `high` above, from a light neutral).
     domain: (low, high), the values at the ends of the colors; by default 0 to 100 for percents, else from 0 (or the
     lowest value, when one is below 0) to the highest value; pass (0, 1) for correlations. label: what the colors mean, written over the color bar.

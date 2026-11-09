@@ -480,13 +480,13 @@ def test_area_beside_names_stay_apart():
 def test_area_colors_follow_the_roles():
     f = vl.area(SHARES, x=CHECKPOINTS, normalize=True, roles={"control": "Answered", "intervention": "Refused"})
     fills = [p["fill"] for p in elements(f.body(960).svg, "polygon")]  # body() draws with the figure's roles
-    assert fills[0] == th.color("gray") and fills[2] == th.color("coral")
+    assert fills[0] == th.color("gray") and fills[2] == th.color("gold")
     f.title = "Refusals fell from 31% to 8% over eight checkpoints"
     assert f.check() == []  # the control and a muted band may share gray: neither is an accent
     default = [p["fill"] for p in elements(vl.area(SHARES, normalize=True).body(960).svg, "polygon")]
     assert default == [th.color(c) for c in th.SERIES[:3]]
     vl.set_roles(intervention="Refused")  # roles set for the whole script apply too
-    assert elements(vl.area(SHARES, normalize=True).body(960).svg, "polygon")[2]["fill"] == th.color("coral")
+    assert elements(vl.area(SHARES, normalize=True).body(960).svg, "polygon")[2]["fill"] == th.color("gold")
 
 
 def test_area_options():

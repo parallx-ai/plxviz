@@ -37,8 +37,8 @@ and nothing else on the figure competes with it.
 ## Look
 
 7. **Keep color meanings fixed across a write-up**: name the conditions once with `viz.set_roles` or a
-   `viz-roles.json` (see [Colors](#colors)). The control is gray; the interventions take orange, blue, sage,
-   purple and ochre in that order; everything else is light gray.
+   `viz-roles.json` (see [Colors](#colors)). The control is gray; the interventions take gold, blue, sage,
+   purple and orange in that order; everything else is light gray.
 8. **Mute what isn't the point.** Conditions without a role go gray. Without roles, `highlight=` puts the accent on
    the bar you are talking about; with roles, it bolds that bar's label.
 9. **Put categories in order of their values** (`sort=True`: largest first; `sort="asc"`: smallest first) unless
@@ -51,12 +51,14 @@ and nothing else on the figure competes with it.
 13. **No caption at the bottom**, in the figure or under it in a write-up. A paper is the exception: it captions
    its figures, so the title and subtitle go in the caption instead (see [Sizes](#sizes)).
 
-Titles, labels, ticks and legends are set in Newsreader, a serif; `viz.set_defaults(font="sans")` switches
-labels, ticks and legends to DM Sans.
+The look follows Parallax (parallax.ai): green-black ink and a gold accent on a white figure, with Parallax cream
+for quote cards. Labels, ticks and legends
+are set in Inter, Parallax's text face, and titles in Newsreader, a serif like the site's headings;
+`viz.set_defaults(font="serif")` sets labels, ticks and legends in Newsreader too.
 
 For a dark page, such as slides or a dark-mode doc, `viz.set_defaults(theme="dark")` (or `viz --theme dark ...`)
-draws light text on GitHub's dark gray, #0D1117. The five intervention colors stay the same, the grays dim, and the
-ordered ramp runs from dim to bright.
+draws light text on Parallax's dark green-black, #111411. Gold brightens to the site's dark-mode gold, the other
+intervention colors stay the same, the grays dim, and the ordered ramp runs from dim to bright.
 
 ## Colors
 
@@ -69,11 +71,11 @@ viz.set_roles(control="Closed book", intervention=["With search", "Search"], sec
 | Role | Color | For |
 |---|---|---|
 | `control` | light gray | the condition without the intervention: the baseline, the untrained model (`baseline` works too) |
-| `intervention` | orange | what the figure is about |
+| `intervention` | gold | what the figure is about |
 | `second` | blue | a second intervention |
 | `third` | sage | a third |
 | `fourth` | purple | a fourth |
-| `fifth` | ochre | a fifth |
+| `fifth` | orange | a fifth |
 | `ordered` | light to dark blue | conditions with an order, such as doses, model sizes or training steps |
 | everything else | light gray | muted, so the named conditions stand out; muted series take three shades in turn |
 
@@ -90,10 +92,10 @@ a color does, so a legend can say `{"Search": "intervention"}` and stay in step 
 - **Per chart.** One chart can add roles with `roles={"second": "Rerank"}`, and a JSON spec takes the same
   `"roles"` key. Explicit `colors=` still win. A figure keeps the roles in effect when it was made.
 
-Without roles, several series take orange, blue, sage, purple and ochre, in that order, then the muted shades, and
-a chart with one color, or one highlighted bar, takes orange, so the accent is the same in every figure. Every
+Without roles, several series take gold, blue, sage, purple and orange, in that order, then the muted shades, and
+a chart with one color, or one highlighted bar, takes gold, so the accent is the same in every figure. Every
 matrix is one type, `heatmap` (`mtmm` is the same matrix for traits measured several ways), drawn like the correlation
-matrices in Anthropic's posts and shaded in one tone: orange (`coral`) by default, or `blue`, `sage` or `green`;
+matrices in Anthropic's posts and shaded in one tone: `gold` by default, or orange (`coral`), `blue`, `sage` or `green`;
 `diverging` puts orange below a center and blue above. `viz colors` prints all
 of this, and `viz colors -o colors.png` draws the card below.
 
@@ -134,9 +136,9 @@ viz.bars(data, title="...", titles=False)        # one figure
   ink, whichever contrasts more), and no text is smaller than 12 px, except the raised exponent in a
   log-axis tick such as 10²⁰.
 - The intervention colors reach 3:1 against the white background and the dark theme's; the gray control is
-  context, and its value is labeled like every bar's. The control and the first three interventions (orange,
+  context, and its value is labeled like every bar's. The control and the first three interventions (gold,
   blue, sage) stay at least 10 CIEDE2000 apart for normal vision and the red-green color blindnesses; blue and
-  sage come closer for the rare tritanopia. Purple and ochre are near blue and orange for red-green color-blind
+  sage come closer for the rare tritanopia. Purple and orange are near blue and gold for red-green color-blind
   readers, so a figure with four or five interventions relies on its labels (name lines at their ends). That is the
   palette's one known trade-off, so the checks leave its own pairs alone and flag any other colors color-blind
   readers can't tell apart. `tests/test_access.py` holds these numbers. The light grays are context, so values on them are

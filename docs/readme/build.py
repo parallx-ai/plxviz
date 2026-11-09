@@ -49,13 +49,13 @@ def examples(width: float, thumb: bool = False) -> dict[str, viz.Figure]:
         "Human evaluations": viz.bars(
             {"Helpful": 53, "Harmless": 72, "Honest": 49}, ci={"Helpful": (47, 59), "Harmless": (67, 77),
                                                               "Honest": (44, 55)},
-            colors=["coral", "blue", "sage"], sort=False, ylabel="Win rate (%)",
+            colors=["gold", "blue", "sage"], sort=False, ylabel="Win rate (%)",
             ticks=[0, 20, 40, 60, 80], height=230, width=width),
         "Representation structure": viz.scatter(
             clusters(), xlabel="PC 1", ylabel="PC 2", xticks=[-2, 0, 2], yticks=[-2, 0, 2], height=250, width=width,
             legend=False if thumb else None),
         "Cross-model comparison": viz.heatmap(
-            SCORES, cols=BENCHMARKS, scale="coral", cell_height=26, width=width),
+            SCORES, cols=BENCHMARKS, scale="gold", cell_height=26, width=width),
     }
 
 
@@ -63,12 +63,12 @@ def examples(width: float, thumb: bool = False) -> dict[str, viz.Figure]:
 
 # Every image reads on GitHub's white page and on its dark one as it is, with no theme switching (which didn't
 # follow GitHub's theme): the header is dark words on a white rounded card, like the example cards; the main button
-# and the icons are orange (about 4.3:1 on both); the other button and the figures' cards are white; the space between
-# the cards is see-through.
-INK, INK2, MUTED = "#1F2328", "#33302B", "#59636E"  # the header's title, tagline and description
-ACCENT = viz.color("coral")
-CARD, BORDER, CARD_INK = "#FFFFFF", "#D1D9E0", "#1F2328"
-SERIF, SANS = "Newsreader, Georgia, serif", "'DM Sans', Helvetica, Arial, sans-serif"
+# and the icons are Parallax gold (about 4:1 on both); the other button and the figures' cards are white; the space
+# between the cards is see-through.
+INK, INK2, MUTED = viz.theme.INK, viz.theme.INK2, viz.theme.MUTED  # the header's title, tagline and description
+ACCENT = viz.color("gold")
+CARD, BORDER, CARD_INK = viz.theme.BG, viz.theme.RULE, viz.theme.INK
+SERIF, SANS = viz.theme.SERIF, viz.theme.SANS
 
 
 def hero() -> str:
@@ -134,7 +134,7 @@ ICONS = {  # 24 x 24 line icons, drawn here so the README needs no icon font
 
 def main() -> None:
     from viz.theme import strong_fill
-    deep = strong_fill("coral")  # the orange deep enough for white text
+    deep = strong_fill("gold")  # the gold deep enough for white text
     render_html(hero(), OUT / "hero.png", 1200, transparent=True)  # see-through only outside the card's corners
     render_html(row(), OUT / "examples.png", 1200, transparent=True)
     render_html(button("Get started &nbsp;→", deep, "#FFFFFF", deep), OUT / "get-started.png", 400, fit=True,

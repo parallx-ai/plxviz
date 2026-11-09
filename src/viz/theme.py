@@ -10,48 +10,49 @@ import math
 from dataclasses import dataclass
 
 
-# ---- surfaces and ink
+# ---- surfaces and ink: Parallax's light tokens (parallax.ai) on a white figure, green-black ink
 BG = "#FFFFFF"        # figure background: white
-CARD = "#F1EEE8"      # quote cards
-CARD_LIGHT = "#FFFDF9"  # code / tool cards
-EP_CARD = "#F7F4EF"   # episode cards (with a hairline border)
-CODE_BG = "#F2F0EE"   # mono blocks inside cards
-SURFACE = "#ECE8E1"   # empty heatmap cell, low end of sequential scales
-INK = "#191918"       # titles, emphasized numbers
-INK2 = "#3D3C38"      # labels, body text
-MUTED = "#6E6C65"     # subtitles, ticks, notes
-FAINT = "#75726A"     # small uppercase labels, secondary code text (4.8:1 on white)
-GRID = "#E6E2DA"      # gridlines
-AXIS = "#B9B6AE"      # axis lines (vertical bars), connectors
-RULE = "#E2DFD7"      # card borders, rules
-INK_ON_FILL, INK2_ON_FILL = "#191918", "#3D3C38"  # dark text on a light fill, whatever the page
+CARD = "#F4F1EA"      # quote cards: Parallax cream
+CARD_LIGHT = "#FDFCF9"  # code / tool cards
+EP_CARD = "#F3F5F2"   # episode cards (with a hairline border): Parallax paper, lightened
+CODE_BG = "#E9EDE8"   # mono blocks inside cards
+SURFACE = "#ECE9E2"   # empty heatmap cell, low end of sequential scales
+INK = "#111411"       # titles, emphasized numbers
+INK2 = "#303631"      # labels, body text
+MUTED = "#606A63"     # subtitles, ticks, notes
+FAINT = "#5E6761"     # small uppercase labels, secondary code text (4.5:1 on the cream cards)
+GRID = "#E1E6E1"      # gridlines
+AXIS = "#B3BBB4"      # axis lines (vertical bars), connectors
+RULE = "#CFD6D0"      # card borders, rules
+INK_ON_FILL, INK2_ON_FILL = "#111411", "#303631"  # dark text on a light fill, whatever the page
 
 # ---- named colors. Color carries meaning across a write-up (viz.colors assigns them by role):
 #   gray  = the control (the baseline, the untrained model), like everything else that isn't the point
-#   coral (orange), blue, sage, purple (plum), ochre = the interventions, in that order
+#   gold (Parallax's accent), blue, sage, purple (plum), coral (orange) = the interventions, in that order
 #   gray  = everything else, muted (gray-light and gray-dark tell muted series apart in a legend)
 #   blue / beige / coral also mark good / neutral / bad outcomes in an outcome chart
 # Accessibility (tests/test_access.py holds these): the control and intervention colors reach 3:1 against the white
 # background (the light gray control is context, labeled like every bar). The control and the first three
 # intervention colors stay at least 10 CIEDE2000 apart for normal
-# vision and the red-green color blindnesses (blue and sage come closer for the rare tritanopia); purple and ochre
-# share hues with blue and orange for red-green color blindness, so a figure with four or five interventions leans
+# vision and the red-green color blindnesses (blue and sage come closer for the rare tritanopia); purple and orange
+# share hues with blue and gold for red-green color blindness, so a figure with four or five interventions leans
 # on its labels, and the checks say so. The light grays are context, so values on them are always labeled.
 PALETTE: dict[str, str] = {
+    "gold": "#A37F1F",
     "coral": "#B8664E",
     "blue": "#557E98",
     "sage": "#668574",
     "beige": "#EADDC2",
-    "gray": "#C2BFB9",
-    "dark": "#57544E",
-    "mid": "#8C887F",
+    "gray": "#BEC5BF",
+    "dark": "#4E5650",
+    "mid": "#848D86",
     "plum": "#88719A",
     "purple": "#88719A",
     "orange": "#B8664E",
-    "ochre": "#9E7A3D",
+    "ochre": "#A37F1F",  # the old name for gold
     "olive": "#507207",
-    "gray-light": "#DCD9D3",
-    "gray-dark": "#ADA9A1",
+    "gray-light": "#D6DCD6",
+    "gray-dark": "#A2ABA4",
     "light-blue": "#AFC4D3",
     "deep-blue": "#41667E",
     "navy": "#2B475A",
@@ -66,9 +67,10 @@ PALETTE: dict[str, str] = {
 
 # Pale fills for tiles and backgrounds (text on them stays ink).
 TINT: dict[str, str] = {
+    "gold": "#EDE0BD",
     "coral": "#F3D9CD",
     "beige": "#EFE8DD",
-    "gray": "#ECE9E3",
+    "gray": "#E4E8E3",
     "blue": "#DDE5EE",
     "sage": "#DCE7DF",
     "surface": SURFACE,
@@ -76,7 +78,7 @@ TINT: dict[str, str] = {
 
 # Default order when several series need colors and no roles were given: the intervention colors in order. Series
 # past the fifth are muted: mute what isn't the point.
-SERIES = ["coral", "blue", "sage", "plum", "ochre"]
+SERIES = ["gold", "blue", "sage", "plum", "coral"]
 MUTED_SHADES = ["gray", "gray-light", "gray-dark"]  # muted series in turn, so a legend can tell them apart
 
 # Ordered conditions (doses, sizes, steps): light to dark in the accent's hue.
@@ -95,6 +97,7 @@ STRONG = {"blue": "deep-blue", "coral": "clay", "sage": "deep-sage"}
 # ramp), so its palest cells still show on white; the diverging scale meets at a light neutral and deepens toward
 # its two tones. Any other color makes a scale of its own hue and chroma.
 SCALES: dict[str, tuple[float, float, float]] = {
+    "gold": (95, 78, 0.12),
     "coral": (62, 38, 0.14),
     "blue": (228, 248, 0.10),
     "sage": (172, 160, 0.075),
@@ -105,18 +108,18 @@ SCALE_START = 0.08
 
 # ---- type
 SERIF = "Newsreader, 'Iowan Old Style', Georgia, serif"
-SANS = "'DM Sans', 'Helvetica Neue', Arial, sans-serif"
+SANS = "Inter, 'Helvetica Neue', Arial, sans-serif"  # Parallax's text face
 MONO = "'JetBrains Mono', Menlo, monospace"
 FAMILIES = {"serif": SERIF, "sans": SANS, "mono": MONO}
-LABEL_FONT = "serif"  # what chart labels, ticks and legends use: "serif" (Newsreader) or "sans" (DM Sans)
+LABEL_FONT = "sans"  # what chart labels, ticks and legends use: "sans" (Inter, as on parallax.ai) or "serif" (Newsreader)
 
 
 def family(f: str) -> str:
     """The font family to draw with: "sans" is the label font, which vl.set_defaults(font=...) picks."""
     return LABEL_FONT if f == "sans" else f
-GOOGLE_FONTS = ("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;"
-                "1,9..40,400&family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;"
-                "0,6..72,600;1,6..72,400&display=swap")
+GOOGLE_FONTS = ("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;"
+                "0,14..32,700;1,14..32,400&family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;"
+                "0,6..72,500;0,6..72,600;1,6..72,400&display=swap")
 
 # ---- figure geometry (CSS px; PNGs render at 2x)
 WIDTH = 960           # content width; the figure is WIDTH + 2 * PAD_X wide (1008 px, 2016 px at 2x)
@@ -305,19 +308,18 @@ def strong_fill(c: str) -> str:
     return out if text_on(out) == "#FFFFFF" else readable(out, "#FFFFFF")
 
 
-# ---- themes: viz.set_defaults(theme="dark") draws for a dark page (slides, dark-mode docs). The five intervention
+# ---- themes: viz.set_defaults(theme="dark") draws for a dark page (slides, dark-mode docs), in parallax.ai's dark tokens. The five intervention
 # colors read on both; the grays dim so "not the point" still recedes, and the ordered ramp runs dim to bright.
 THEME = "light"
 _TOKENS = ("BG", "CARD", "CARD_LIGHT", "EP_CARD", "CODE_BG", "SURFACE", "INK", "INK2", "MUTED", "FAINT", "GRID",
            "AXIS", "RULE")
 _LIGHT = {k: globals()[k] for k in _TOKENS}
-_DARK = {"BG": "#0D1117", "CARD": "#161B22", "CARD_LIGHT": "#0D1117", "EP_CARD": "#161B22", "CODE_BG": "#21262D",
-         "SURFACE": "#21262D", "INK": "#E6EDF3",
-         "INK2": "#C9D1D9", "MUTED": "#9198A1", "FAINT": "#9198A1", "GRID": "#21262D", "AXIS": "#3D444D",
-         "RULE": "#30363D"}
+_DARK = {"BG": "#111411", "CARD": "#171C19", "CARD_LIGHT": "#111411", "EP_CARD": "#171C19", "CODE_BG": "#202722",
+         "SURFACE": "#202722", "INK": "#EFF1E9", "INK2": "#CBD0C9", "MUTED": "#A9B0AA", "FAINT": "#A9B0AA",
+         "GRID": "#272E29", "AXIS": "#3E4740", "RULE": "#343C36"}  # Parallax's dark tokens
 _PALETTE_LIGHT, _TINT_LIGHT, _RAMP_LIGHT = dict(PALETTE), dict(TINT), RAMP
-_PALETTE_DARK = {"gray": "#59616B", "gray-light": "#454C55", "gray-dark": "#6E7681", "beige": "#6A5F53",
-                 "dark": "#C9D1D9", "mid": "#8B949E"}
+_PALETTE_DARK = {"gold": "#D7AA3D", "ochre": "#D7AA3D", "gray": "#565F58", "gray-light": "#444B46",
+                 "gray-dark": "#6B746D", "beige": "#665E4C", "dark": "#CBD0C9", "mid": "#8A938C"}
 _SCALE_L_LIGHT, _SCALE_L_DARK = SCALE_L, (0.29, 0.78)
 
 
@@ -335,7 +337,7 @@ def use_theme(name: str) -> None:
         RAMP, SCALE_L = _RAMP_LIGHT, _SCALE_L_LIGHT
     else:
         PALETTE.update(_PALETTE_DARK)
-        TINT.update({k: mix(PALETTE[k], BG, 0.72) for k in ("coral", "beige", "gray", "blue", "sage")})
+        TINT.update({k: mix(PALETTE[k], BG, 0.72) for k in ("gold", "coral", "beige", "gray", "blue", "sage")})
         TINT["surface"] = SURFACE
         RAMP, SCALE_L = ("navy", "blue", "light-blue"), _SCALE_L_DARK
     THEME = name

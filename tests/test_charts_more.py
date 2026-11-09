@@ -107,7 +107,7 @@ def test_none_and_nan_are_skipped():
         assert f.svg().startswith("<svg")
     # runs: missing values are dropped, missing bars still get their dots
     svg = vl.bars({"a": None, "b": 2.0}, runs={"a": [1.0, None, NAN, 3.0], "b": [2.0]}, unit="").svg()
-    assert svg.count('stroke="#FFFFFF" stroke-width="1"') == 3
+    assert svg.count(f'stroke="{th.BG}" stroke-width="1"') == 3
     with pytest.raises(ValueError, match="finite"):
         vl.box({"a": [1.0, math.inf]})
 

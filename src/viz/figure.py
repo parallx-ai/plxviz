@@ -34,7 +34,7 @@ class Defaults:
     width: float | None = None      # content width in px; None takes it from the size
     scale: float | None = None      # PNG pixel ratio; None takes it from the size (300 dpi for print sizes)
     checks: str = "warn"  # what saving does with a figure that breaks a house rule: warn, error or off
-    font: str = "serif"   # chart labels, ticks and legends: "serif" (Newsreader) or "sans" (DM Sans)
+    font: str = "sans"    # chart labels, ticks and legends: "sans" (Inter) or "serif" (Newsreader)
     theme: str = "light"  # "dark" draws for a dark page
     titles: bool = True   # False leaves the title and subtitle out of the image, for a paper's caption (fig.caption())
 

@@ -23,8 +23,8 @@ from .text import FONT_DIR
 from . import theme as _th
 
 FACES = [  # family, file, style, weight range
-    ("DM Sans", "DMSans.ttf", "normal", "100 1000"),
-    ("DM Sans", "DMSans-Italic.ttf", "italic", "100 1000"),
+    ("Inter", "Inter.ttf", "normal", "100 900"),
+    ("Inter", "Inter-Italic.ttf", "italic", "100 900"),
     ("Newsreader", "Newsreader.ttf", "normal", "200 800"),
     ("Newsreader", "Newsreader-Italic.ttf", "italic", "200 800"),
     ("JetBrains Mono", "JetBrainsMono.ttf", "normal", "100 800"),
@@ -43,7 +43,7 @@ def _page(svg: str, w: float, h: float) -> str:
 
 
 _SIZE = re.compile(r'<svg[^>]*?width="([\d.]+)"[^>]*?height="([\d.]+)"')
-_FONT_PROBES = ["400 13px 'DM Sans'", "600 13px 'DM Sans'", "italic 400 13px 'DM Sans'", "400 16px Newsreader",
+_FONT_PROBES = ["400 13px Inter", "600 13px Inter", "italic 400 13px Inter", "400 16px Newsreader",
                 "600 22px Newsreader", "italic 400 16px Newsreader", "400 13px 'JetBrains Mono'",
                 "600 13px 'JetBrains Mono'"]
 
@@ -222,7 +222,7 @@ def font_face_css(svg: str) -> str:
     """@font-face rules with the used glyphs subset and inlined, so the SVG renders the same anywhere."""
     text = _chars(svg)
     used = []
-    if "DM Sans" in svg:
+    if _th.SANS in svg:
         used.append(FACES[0])
         if 'font-style="italic"' in svg:
             used.append(FACES[1])

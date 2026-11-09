@@ -5,11 +5,11 @@
 
 control       light gray  the condition without the intervention: the baseline, the untrained model ("baseline"
                           means the same role)
-intervention  orange      what the figure is about
+intervention  gold        what the figure is about (Parallax's accent)
 second        blue        a second intervention
 third         sage        a third
 fourth        purple      a fourth (for red-green color-blind readers it nears blue, so label it)
-fifth         ochre       a fifth (it nears orange the same way)
+fifth         orange      a fifth (it nears gold the same way)
 ordered       light blue to navy, for conditions with an order: doses, model sizes, training steps
 everything else           muted gray, so the named conditions stand out (muted series take three shades in turn)
 
@@ -29,8 +29,8 @@ from collections.abc import Mapping
 from contextlib import contextmanager
 from pathlib import Path
 
-ROLES = {"control": "gray", "intervention": "coral", "second": "blue", "third": "sage", "fourth": "plum",
-         "fifth": "ochre"}
+ROLES = {"control": "gray", "intervention": "gold", "second": "blue", "third": "sage", "fourth": "plum",
+         "fifth": "coral"}
 ALIASES = {"baseline": "control"}
 ROLE_NAMES = (*ROLES, *ALIASES, "ordered")
 MUTED = "gray"

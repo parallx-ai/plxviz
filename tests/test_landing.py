@@ -23,7 +23,7 @@ def test_grouped_scatter_colors_each_group_and_has_a_legend():
     assert svg.count('fill-opacity="0.72"') == 4
     assert ">Refusal<" in svg and ">Compliance<" in svg  # the legend
     viz.set_roles(intervention="Compliance")
-    assert th.color("coral") in viz.scatter(groups, legend=False).svg()
+    assert th.color("gold") in viz.scatter(groups, legend=False).svg()
     assert "2 groups" in f.alt_text()
 
 

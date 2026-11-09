@@ -24,7 +24,7 @@ def state():
 def test_dark_and_back_restores_every_color():
     before = state()
     viz.set_defaults(theme="dark")
-    assert th.BG == "#0D1117" and state() != before
+    assert th.BG == "#111411" and state() != before
     viz.set_defaults(theme="light")
     assert state() == before
     with pytest.raises(ValueError):
@@ -36,7 +36,7 @@ def test_dark_text_and_marks_reach_their_contrast():
     for ink in ("INK", "INK2", "MUTED", "FAINT"):
         for bg in ("BG", "CARD", "EP_CARD", "CODE_BG"):
             assert access.contrast(getattr(th, ink), getattr(th, bg)) >= 4.5, (ink, bg)
-    for name in ("coral", "blue", "sage", "plum", "ochre"):
+    for name in th.SERIES:
         assert access.contrast(th.color(name), th.BG) >= 3, name
     for name in ("deep-blue", "clay"):  # the code card's parameter and string colors
         assert access.contrast(th.readable(name, th.CARD_LIGHT), th.CARD_LIGHT) >= 4.5

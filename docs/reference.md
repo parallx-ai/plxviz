@@ -105,7 +105,7 @@ templates are in [examples/](../examples/README.md).
 | `area(series, x=...)` | Stacked areas over steps, each band named at its end; `normalize=True` for shares that add up to 100%. |
 | **Grids and tables** | |
 | `table(rows, columns=...)` | A results table in the booktabs look: the best value per column bold (`better="lower"` or per column), `ci=` as ±x, `highlight=` a row, `viz.section` rows. |
-| `heatmap(data, ...)` | The one matrix chart, for models against evals or attacks, a confusion matrix or correlations, drawn like the correlation matrices in Anthropic's posts: cells that touch, each value written in its cell, a color bar (`label=` names it), rows at the left and columns underneath. One tone (`scale="coral"`, the default, or `"blue"`, `"sage"`, `"green"`) or `"diverging"`; `values="lower"` writes a correlation matrix's values once; `row_groups` and `col_groups` set groups apart. |
+| `heatmap(data, ...)` | The one matrix chart, for models against evals or attacks, a confusion matrix or correlations, drawn like the correlation matrices in Anthropic's posts: cells that touch, each value written in its cell, a color bar (`label=` names it), rows at the left and columns underneath. One tone (`scale="gold"`, the default, or `"coral"`, `"blue"`, `"sage"`, `"green"`) or `"diverging"`; `values="lower"` writes a correlation matrix's values once; `row_groups` and `col_groups` set groups apart. |
 | `mtmm(data, traits=..., methods=...)` | A multitrait-multimethod matrix: the correlations among traits, each measured by several methods (a self-report, a judge, a probe), as the same matrix with the traits in method blocks and the same trait under different methods boxed. `ci=` hatches the cells whose interval includes zero, `intervals=True` writes each interval under its value, `reliabilities=` fills the diagonal, and `triangle="full"` draws both halves. |
 | **Points** | |
 | `scatter(points, ...)` | One dot per model or dataset, or groups of points such as projected activations, with labels, `diagonal=`, `trend="fit"`, annotations, and `frontier="upper-left"` for the Pareto frontier. |
@@ -139,7 +139,7 @@ The distribution charts take the raw values: `{group: [v, ...]}`, or a plain lis
 and show counts or percents of items on y. None and NaN are skipped everywhere.
 
 Colors are names from `viz.PALETTE`, or role names such as `"intervention"`: the control `gray`; the interventions
-`coral` (also `orange`), `blue`, `sage`, `plum` (also `purple`) and `ochre`; the muted `gray`, `gray-light` and
+`gold` (also `ochre`), `blue`, `sage`, `plum` (also `purple`) and `coral` (also `orange`); the muted `gray`, `gray-light` and
 `gray-dark`; `beige` for a neutral outcome; and `dark`, `light-blue`, `navy`, `deep-blue`, `olive`, `mid`,
 `light-sage`, `deep-sage`, `light-coral` and `clay`. Hex values also work. Run `viz colors` to list them.
 
@@ -159,7 +159,7 @@ viz --theme dark ...                any command in the dark theme
 
 ## How it works
 
-Python builds one SVG per figure. Text is measured with the bundled font files: Newsreader, DM Sans and
+Python builds one SVG per figure. Text is measured with the bundled font files: Inter, Newsreader and
 JetBrains Mono, all under the OFL, in `src/viz/fonts`. Labels, wrapping and margins are computed before anything
 is drawn. One headless Chromium, started on first use and reused, turns the SVG into a PNG in about 0.1 s per
 figure. A PDF takes about half a second more: Chromium writes variable fonts and outlined text as Type 3 fonts, so

@@ -18,7 +18,7 @@ UNSET = _Unset()
 
 YLABEL_X, YLABEL_BAND = 13, 24  # the rotated y label's baseline, and the band it takes before the tick labels (a
 # 12 px gap between them); charts put their tick labels' left edge at 4 + YLABEL_BAND when there is a y label
-ACCENT = "intervention"  # a chart's one color when nothing else sets it: the intervention role's orange
+ACCENT = "intervention"  # a chart's one color when nothing else sets it: the intervention role's gold
 
 
 def resolve_unit(unit) -> tuple[str, bool]:
@@ -35,8 +35,8 @@ def _muted(k: int) -> str:
 
 def series_colors(ns: int, colors=None, names: Sequence[str] | None = None, highlight=None) -> list[str]:
     """Colors for ns series: a list, a {series name: color} dict, else the color roles (viz.set_roles: named series
-    get their role's color and the rest take the muted shades in turn), else the default order (orange, blue, sage,
-    ...; one series alone is orange). highlight: series that keep their color; the others go gray."""
+    get their role's color and the rest take the muted shades in turn), else the default order (gold, blue, sage,
+    ...; one series alone is gold). highlight: series that keep their color; the others go gray."""
     names = list(names or [])
     gray = th.color(roles.MUTED)
     specific = [True] * ns
@@ -116,7 +116,7 @@ def as_set(x) -> set[str]:
 def row_colors(labels: list[str], *, color=None, colors=None, highlight=None, accent: str = ACCENT) -> list[str]:
     """Per-bar colors for a single series: explicit per-label colors; else the label's color role (viz.set_roles),
     with every label that has no role muted (highlight= then only bolds a label, it doesn't recolor it); else the
-    accent on highlighted rows and gray for the rest; else a single color (the accent, orange)."""
+    accent on highlighted rows and gray for the rest; else a single color (the accent, gold)."""
     hl = as_set(highlight)
     by_role = [roles.role_color(lab) for lab in labels]
     in_play = any(by_role)

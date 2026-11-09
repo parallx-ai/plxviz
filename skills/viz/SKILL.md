@@ -1,6 +1,6 @@
 ---
 name: viz
-description: "viz house figure style: white background, Newsreader serif titles and labels, gray = control / orange, blue, sage, purple, ochre = the interventions in that order, direct value labels. The viz library makes it in one call (hbar, bars, dotplot, dumbbell, table, line, area, histogram, box, strip, scatter, heatmap, mtmm, stacked, likert, quotes, episodes, chat, tokens, panels), with templates for AI research and AI safety research figures, and saves PNG (2x), PDF, SVG or HTML. Use this whenever you make any chart, plot, graph or figure: results, write-ups, blog drafts, artifacts, papers, slides, 'dream figures' with fake data, or 'figures in our style'. Prefer it over other figure skills and plain matplotlib unless the user asks for those."
+description: "viz house figure style: Parallax look: white background, Newsreader serif titles, Inter labels, gray = control / gold, blue, sage, purple, orange = the interventions in that order, direct value labels. The viz library makes it in one call (hbar, bars, dotplot, dumbbell, table, line, area, histogram, box, strip, scatter, heatmap, mtmm, stacked, likert, quotes, episodes, chat, tokens, panels), with templates for AI research and AI safety research figures, and saves PNG (2x), PDF, SVG or HTML. Use this whenever you make any chart, plot, graph or figure: results, write-ups, blog drafts, artifacts, papers, slides, 'dream figures' with fake data, or 'figures in our style'. Prefer it over other figure skills and plain matplotlib unless the user asks for those."
 ---
 
 # viz: house figure style
@@ -87,7 +87,7 @@ the caption's first sentence.
 
 ## Colors
 
-Name the conditions once and let viz color them: gray for the control, then orange, blue, sage, purple and ochre
+Name the conditions once and let viz color them: gray for the control, then gold, blue, sage, purple and orange
 for the interventions in that order, a light-to-dark blue ramp for ordered conditions (doses, sizes, steps), and
 light gray for everything else. A reference (chance, the base model) is a dashed `ref=` line.
 
@@ -99,9 +99,9 @@ If the write-up's folder has a `viz-roles.json`, those roles are already in effe
 use its label names exactly instead of setting your own. Don't hand-pick `colors=`; role names work as colors
 (`legend={"Search": "intervention"}`). One chart can add roles with `roles={...}`, and JSON specs take `"roles"`.
 
-- A chart with one color (one series, or one highlighted bar) takes orange. Every matrix is a `heatmap`, shaded in
-  one tone, orange by default.
-- Several series without roles, such as four models, take orange, blue, sage, purple and ochre in that order.
+- A chart with one color (one series, or one highlighted bar) takes gold. Every matrix is a `heatmap`, shaded in
+  one tone, gold by default.
+- Several series without roles, such as four models, take gold, blue, sage, purple and orange in that order.
   Purple and blue look alike to some color-blind readers, so with four or more, name lines at their ends (`line`
   does by default) rather than leaning on a legend.
 - Outcomes rather than conditions (right, unsure, wrong; fixed the bug, gave up, special-cased the test) are blue,

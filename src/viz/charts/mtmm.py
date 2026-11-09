@@ -59,7 +59,7 @@ def _reliabilities(rel, traits: list[str], methods: list[str]) -> list[float | N
 
 
 def mtmm(data, *, traits, methods, ci=None, reliabilities=None, triangle="lower", values=True, intervals=False,
-         decimals=None, fmt=None, scale="coral", domain=(0.0, 1.0), low="coral", high="blue", title=None,
+         decimals=None, fmt=None, scale="gold", domain=(0.0, 1.0), low="coral", high="blue", title=None,
          subtitle=None, width=None) -> Figure:
     """Multitrait-multimethod matrix: the correlations among several traits, each measured by two or more methods,
     the standard figure for convergent and discriminant validity (Campbell and Fiske, 1959), drawn as viz's matrix.

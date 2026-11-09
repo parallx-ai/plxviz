@@ -131,5 +131,5 @@ Several charts in one figure, with one legend.
 
 ## License
 
-MIT. The bundled fonts, Newsreader, DM Sans and JetBrains Mono, are under the SIL Open Font License; their license
+MIT. The bundled fonts, Inter, Newsreader and JetBrains Mono, are under the SIL Open Font License; their license
 files are in [`src/viz/fonts`](src/viz/fonts).

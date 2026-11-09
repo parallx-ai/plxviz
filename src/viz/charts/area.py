@@ -51,7 +51,7 @@ def area(series, *, x=None, normalize=False, colors=None, xscale="linear", xtick
     in every series). None and NaN count as 0; values below 0 are an error. normalize=True turns each x into shares
     of its total (0-100%).
     Each band is named at its right end: inside the band where it is tall enough, else beside it. Colors follow the
-    color roles (viz.set_roles), else orange, blue, sage, ...; colors= (a list, {name: color} or role names)
+    color roles (viz.set_roles), else gold, blue, sage, ...; colors= (a list, {name: color} or role names)
     overrides them, such as ["blue", "beige", "coral"] for good, neutral and bad outcomes.
     The axes take line()'s options: xscale ("linear", "category" or "log"), xticks, xtick_labels, xunit, xlabel,
     ylabel, ticks, domain, step, unit (percent by default; unit="" for counts), height and marks={x: "label"}.

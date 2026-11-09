@@ -18,15 +18,15 @@ from . import theme as th
 FONT_DIR = Path(__file__).parent / "fonts"
 FILES = {
     ("serif", False): "Newsreader.ttf", ("serif", True): "Newsreader-Italic.ttf",
-    ("sans", False): "DMSans.ttf", ("sans", True): "DMSans-Italic.ttf",
+    ("sans", False): "Inter.ttf", ("sans", True): "Inter-Italic.ttf",
     ("mono", False): "JetBrainsMono.ttf", ("mono", True): "JetBrainsMono.ttf",
 }
 AXES = {"Newsreader.ttf": ("wght", "opsz"), "Newsreader-Italic.ttf": ("wght", "opsz"),
-        "DMSans.ttf": ("opsz", "wght"), "DMSans-Italic.ttf": ("opsz", "wght"), "JetBrainsMono.ttf": ("wght",)}
-OPSZ = {"Newsreader": (6, 72), "DMSans": (9, 40)}
+        "Inter.ttf": ("opsz", "wght"), "Inter-Italic.ttf": ("opsz", "wght"), "JetBrainsMono.ttf": ("wght",)}
+OPSZ = {"Newsreader": (6, 72), "Inter": (14, 32)}
 # ascent (fraction of the em) of each family: places a baseline inside a CSS-style line box
-ASCENT = {"serif": 0.735, "sans": 0.992, "mono": 1.02}
-DESCENT = {"serif": 0.265, "sans": 0.310, "mono": 0.30}
+ASCENT = {"serif": 0.735, "sans": 0.969, "mono": 1.02}
+DESCENT = {"serif": 0.265, "sans": 0.241, "mono": 0.30}
 _REF = 200  # measure at a large size, then scale: avoids hinting/rounding noise at small sizes
 _ENGINE = ImageFont.Layout.RAQM if features.check("raqm") else ImageFont.Layout.BASIC
 SAFETY = 0.985  # wrap a little early: Chromium snaps glyph advances to whole pixels
