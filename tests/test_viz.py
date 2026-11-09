@@ -161,7 +161,7 @@ def test_unknown_color_message():
         vl.hbar({"a": 1}, color="chartreuse").svg()
 
 
-REBUILD = "run: viz gallery -o docs/gallery --examples examples/README.md --readme README.md"
+REBUILD = "run: viz gallery -o docs/gallery --examples examples/README.md"
 
 
 def test_the_examples_page_is_generated_from_the_gallery():
@@ -172,12 +172,11 @@ def test_the_examples_page_is_generated_from_the_gallery():
     assert page.read_text() == examples(), REBUILD
 
 
-def test_the_readme_gallery_is_generated_and_every_template_has_its_image():
+def test_every_template_has_its_image():
     from pathlib import Path
 
-    from viz.gallery import EXAMPLES, ORDER, STEM, about, readme_gallery
+    from viz.gallery import EXAMPLES, ORDER, STEM, about
     root = Path(__file__).resolve().parents[1]
-    assert readme_gallery() in (root / "README.md").read_text(), REBUILD
     assert len(set(ORDER)) == len(ORDER)  # each template in one section
     assert sorted(p.stem for p in EXAMPLES.glob("*.py")) == sorted(STEM.values())  # and every script in a section
     assert all(about(n) != n for n in ORDER)  # each says what it is for

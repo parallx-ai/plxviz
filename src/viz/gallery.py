@@ -3,7 +3,7 @@
 Each template is a short script that makes one figure and saves it (examples/NN_name.py). This module runs them
 to render the gallery and writes the two pages that show them:
 
-    viz gallery -o docs/gallery --examples examples/README.md --readme README.md
+    viz gallery -o docs/gallery --examples examples/README.md
 """
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from . import theme as th
 EXAMPLES = Path(__file__).resolve().parents[2] / "examples"  # the templates live in the clone, beside src/
 
 # The templates by the question a figure answers. This order numbers their files (examples/NN_name.py and
-# docs/gallery/NN_name.png) and lays out examples/README.md and the README's gallery.
+# docs/gallery/NN_name.png) and lays out examples/README.md.
 SECTIONS = [
     ("Comparisons", "Rates across conditions and models, with their intervals.",
      ["hbar", "bars", "bars_runs", "dotplot", "stacked"]),
@@ -132,20 +132,6 @@ def overview(images: str, link: str, heading: str = "###") -> str:
                 f'alt="{about(n)}"></a>' for n in names]
         out.append("")
     return "\n".join(out).rstrip("\n")
-
-
-README_START, README_END = "<!-- gallery: generated from src/viz/gallery.py -->", "<!-- /gallery -->"
-
-
-def readme_gallery() -> str:
-    """The README's gallery: the overview, linking into examples/README.md."""
-    return f"{README_START}\n{overview('docs/gallery', 'examples/README.md')}\n{README_END}"
-
-
-def update_readme(path: Path) -> None:
-    s = path.read_text()
-    a, b = s.index(README_START), s.index(README_END) + len(README_END)
-    path.write_text(s[:a] + readme_gallery() + s[b:])
 
 
 def examples() -> str:

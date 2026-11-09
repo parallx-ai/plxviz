@@ -10,9 +10,9 @@ from viz import theme as th
 
 
 @pytest.fixture(autouse=True)
-def serif():
+def label_font():
     yield
-    viz.set_defaults(font="serif")
+    viz.set_defaults(font="sans")
     viz.set_roles()
 
 
@@ -44,8 +44,8 @@ def test_heatmap_values_never_overflow_their_cells():
 
 def test_the_label_font_is_one_setting():
     f = viz.bars({"A": 1, "B": 2}, title="B led")
+    assert th.FAMILIES["sans"] in f.svg()  # Inter by default
+    viz.set_defaults(font="serif")
     assert th.FAMILIES["serif"] in f.svg() and th.FAMILIES["sans"] not in f.svg()
-    viz.set_defaults(font="sans")
-    assert th.FAMILIES["sans"] in f.svg()
     with pytest.raises(ValueError):
         viz.set_defaults(font="comic")
