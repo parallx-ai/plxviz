@@ -9,6 +9,12 @@ publication-quality charts for AI research, set in Parallax's font (Inter) and c
 uv add "viz @ git+https://github.com/parallx-ai/plxviz"
 ```
 
+For agents, install the plotting skill:
+
+```bash
+npx skills add parallx-ai/plxviz
+```
+
 ## Quick start
 
 ```python

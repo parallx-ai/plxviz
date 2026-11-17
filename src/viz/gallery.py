@@ -16,8 +16,9 @@ from pathlib import Path
 import viz
 from . import svg as S
 from . import theme as th
+from .cli import home
 
-EXAMPLES = Path(__file__).resolve().parents[2] / "examples"  # the templates live in the clone, beside src/
+EXAMPLES = home() / "examples"  # checkout templates for editable installs, bundled templates otherwise
 
 # The templates by the question a figure answers. This order numbers their files (examples/NN_name.py and
 # docs/gallery/NN_name.png) and lays out examples/README.md.
@@ -46,7 +47,7 @@ STEM = {name: f"{i:02d}_{name}" for i, name in enumerate(ORDER, 1)}
 def template(name: str) -> Path:
     path = EXAMPLES / f"{STEM[name]}.py"
     if not path.is_file():
-        raise FileNotFoundError(f"no template {path}: the gallery runs from a viz clone")
+        raise FileNotFoundError(f"no template {path}")
     return path
 
 

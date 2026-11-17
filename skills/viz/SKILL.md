@@ -12,9 +12,10 @@ style rules and `docs/reference.md` every chart and option.
 ## Set up, once
 
 ```bash
-command -v viz >/dev/null || uv tool install git+https://github.com/safety-research/viz
+uv tool install --force git+https://github.com/parallx-ai/plxviz
 ```
 
+The fork keeps the `viz` package and command names. `--force` also overwrites a `viz` command installed by another tool.
 No `uv`? Install it first: `curl -LsSf https://astral.sh/uv/install.sh | sh`. If `viz` is still not found after
 installing, uv's bin folder is not on PATH: run `uv tool update-shell` and open a new shell, or call it as
 `"$(uv tool dir --bin)/viz"`.
@@ -28,7 +29,7 @@ viz run make_figs.py
 ```
 
 A script that also needs the project's packages runs in the project instead: add viz to it with
-`uv add "viz @ git+https://github.com/safety-research/viz"` (or `pip install git+https://github.com/safety-research/viz`),
+`uv add "viz @ git+https://github.com/parallx-ai/plxviz"` (or `pip install git+https://github.com/parallx-ai/plxviz`),
 then `uv run make_figs.py`.
 
 To render a JSON spec (one dict, or a list with an "out" path on each):
