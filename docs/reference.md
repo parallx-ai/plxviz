@@ -16,7 +16,7 @@ figure; [the examples](../examples/README.md) are templates to copy.
 For an agent, one command:
 
 ```bash
-npx skills add safety-research/viz
+npx skills add parallx-ai/plxviz
 ```
 
 It copies `skills/viz/` into the skills folder of Claude Code and the other agents the
@@ -26,9 +26,10 @@ itself the first time it needs it. `npx skills update viz` updates the skill.
 To use viz from Python without an agent, install the command directly:
 
 ```bash
-uv tool install git+https://github.com/safety-research/viz
+uv tool install --force git+https://github.com/parallx-ai/plxviz
 ```
 
+The fork keeps the `viz` package and command names; `--force` replaces an existing upstream installation.
 It brings the library, the templates and these docs: `viz path` prints where they landed, the templates in
 `examples/` and the docs in `docs/`. The same URL works with `pip install` and `uv add` (see below). The first
 PNG or PDF downloads the headless Chromium that renders them, once per Python environment; `viz setup` does it
@@ -51,7 +52,7 @@ viz run make_figs.py
 A script that also needs a project's packages belongs in that project. Add viz to it:
 
 ```bash
-uv add "viz @ git+https://github.com/safety-research/viz"    # or: pip install git+https://github.com/safety-research/viz
+uv add "viz @ git+https://github.com/parallx-ai/plxviz"    # or: pip install git+https://github.com/parallx-ai/plxviz
 uv run make_figs.py
 ```
 
