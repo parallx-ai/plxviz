@@ -15,7 +15,7 @@ style rules and `docs/reference.md` every chart and option.
 uv tool install --force git+https://github.com/parallx-ai/plxviz
 ```
 
-The fork keeps the `viz` package and command names; `--force` replaces an existing upstream installation.
+The fork keeps the `viz` package and command names. `--force` also overwrites a `viz` command installed by another tool.
 No `uv`? Install it first: `curl -LsSf https://astral.sh/uv/install.sh | sh`. If `viz` is still not found after
 installing, uv's bin folder is not on PATH: run `uv tool update-shell` and open a new shell, or call it as
 `"$(uv tool dir --bin)/viz"`.

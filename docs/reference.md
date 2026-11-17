@@ -29,8 +29,8 @@ To use viz from Python without an agent, install the command directly:
 uv tool install --force git+https://github.com/parallx-ai/plxviz
 ```
 
-The fork keeps the `viz` package and command names; `--force` replaces an existing upstream installation.
-It brings the library, the templates and these docs: `viz path` prints where they landed, the templates in
+The fork keeps the `viz` package and command names. `--force` also overwrites a `viz` command installed by another tool.
+The command installs the library, templates and docs: `viz path` prints where they landed, the templates in
 `examples/` and the docs in `docs/`. The same URL works with `pip install` and `uv add` (see below). The first
 PNG or PDF downloads the headless Chromium that renders them, once per Python environment; `viz setup` does it
 ahead of time. To update, run the install again with `--reinstall`.
