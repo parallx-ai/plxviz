@@ -144,6 +144,12 @@ Colors are names from `viz.PALETTE`, or role names such as `"intervention"`: the
 `gray-dark`; `beige` for a neutral outcome; and `dark`, `light-blue`, `navy`, `deep-blue`, `olive`, `mid`,
 `light-sage`, `deep-sage`, `light-coral` and `clay`. Hex values also work. Run `viz colors` to list them.
 
+To draw in the same colors elsewhere, use `docs/palette.json` (or `viz colors --json`): the light theme's colors,
+roles, series order, ordered ramp, heatmap scales, fonts and text sizes, with reference values for checking a port
+of the scale formulas. Parallax's [article template](https://github.com/parallx-ai/blog-template) reads it for its
+interactive figures. A test keeps the file current: after changing the palette, run
+`viz colors --json > docs/palette.json`.
+
 ## Command line
 
 ```
@@ -151,6 +157,7 @@ viz render spec.json -o fig.png     one spec or a list of specs (JSON); '-' read
 viz check spec.json                 the style rules each spec breaks (exit 1 if any), without rendering
 viz gallery -o out/                 render every template
 viz colors                          print the roles and palettes; -o colors.png draws the card
+viz colors --json                   the same as data (light theme), as in docs/palette.json
 viz roles                           the color roles in effect here and the file they came from
 viz path                            viz's folder: the templates in examples/, the docs in docs/
 viz run make_figs.py                run a script with the Python that has viz installed

@@ -3,6 +3,7 @@
     viz render spec.json -o fig.png     one spec or a list of specs (JSON); '-' reads stdin
     viz gallery -o out/                 render the gallery of templates (--examples: their page)
     viz colors                          print the palette
+    viz colors --json                   the palette as JSON, for drawing in the same colors elsewhere
     viz check spec.json                 list the house rules each spec breaks (exit 1 if any), without rendering
     viz roles                           print the color roles in effect here and the file they came from
     viz path                            print viz's folder, with the templates in examples/ and the docs in docs/
@@ -44,6 +45,8 @@ def main(argv: list[str] | None = None) -> int:
     g.add_argument("--examples", help="also write the examples page (markdown) to this path")
     co = sub.add_parser("colors", help="print the color roles and palettes; -o renders the palette card")
     co.add_argument("-o", "--out", help="save the palette card (.png .pdf .svg .html)")
+    co.add_argument("--json", action="store_true",
+                    help="print the light palette, color scales and text sizes as JSON (as in docs/palette.json)")
     c = sub.add_parser("check", help="list the house rules a JSON spec (or list of specs) breaks")
     c.add_argument("spec", help="path to a .json spec, or - for stdin")
     sub.add_parser("roles", help="print the color roles in effect here (viz-roles.json) and where they came from")
@@ -72,6 +75,11 @@ def main(argv: list[str] | None = None) -> int:
         from .theme import MUTED_SHADES, OUTCOMES, PALETTE, RAMP, SCALES, SERIES
         if a.out:
             print(card().save(a.out))
+            return 0
+        if a.json:
+            import json
+            from .web import palette
+            print(json.dumps(palette(), indent=2))
             return 0
         print("Roles (viz.set_roles or viz-roles.json):")
         for role, name in ROLES.items():
